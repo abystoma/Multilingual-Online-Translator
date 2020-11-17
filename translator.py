@@ -23,10 +23,24 @@ print(str(r.status_code)+" OK" if r.status_code == 200 else r.status_code)
 # created a parse for the page
 soup = BeautifulSoup(r.content, 'html.parser')
 
-translation = soup.find_all("a", {'class': 'translation'})
+translations = [i.text.strip()
+                for i in soup.find_all("a", {'class': 'translation'})][1::]
 
-examples = soup.find_all("span", {'class': 'text'})
-print("Translations")
+english_examples = [i.text.strip()
+                    for i in soup.find_all("div", {'class': 'src ltr'})]
 
-print([i.text.strip() for i in translation][1::])
-print([i.text.strip() for i in examples])
+french_examples = [i.text.strip()
+                   for i in soup.find_all("div", {'class': 'trg ltr'})]
+print("Context examples:")
+print()
+print("French Translations:")
+
+for translation in translations[:5]:
+    print(translation)
+
+print()
+print("French Examples:")
+
+for en, fr in zip(english_examples[:5], french_examples[:5]):
+    print(en+":\n"+fr)
+    print()
