@@ -1,6 +1,6 @@
 from requests import Session
 from bs4 import BeautifulSoup
-from argparse import ArgumentParser
+import argparse
 import sys  # first, we import the module
 
 
@@ -9,7 +9,8 @@ args = sys.argv  # we get the list of arguments
 
 session = Session()
 
-languages = ["Arabic",
+languages = ["All",
+             "Arabic",
              "German",
              "English",
              "Spanish",
@@ -24,52 +25,40 @@ languages = ["Arabic",
              "Turkish"]
 
 
-def output():
-    print("""Hello, you're welcome to the translator. Translator supports: 
-    1. Arabic
-    2. German
-    3. English
-    4. Spanish
-    5. French
-    6. Hebrew
-    7. Japanese
-    8. Dutch
-    9. Polish
-    10. Portuguese
-    11. Romanian
-    12. Russian
-    13. Turkish""")
-
-
 def to_lang(word, lang_in, lang_out):
     url = f"https://context.reverso.net/translation/{lang_in.lower()}-{lang_out.lower()}/{word}"
 
     r = session.get(url, headers={'user-agent': 'Mozilla/5.0'})
 
+    if r.status_code == 404:
+        output = f"Sorry, unable to find {word}"
+    elif not r:
+        output='Something wrong with your internet connection'
     # created a parse for the page
-    soup = BeautifulSoup(r.content, 'html.parser')
+    else:
+        soup = BeautifulSoup(r.content, 'html.parser')
 
-    translations = [i.text.strip()
-                    for i in soup.find_all("a", {'class': 'translation'})][1::]
+        translations = [i.text.strip()
+                        for i in soup.find_all("a", {'class': 'translation'})][1::]
 
-    src_examples = [i.text.strip()
-                    for i in soup.find_all("div", {'class': 'src ltr'})]
+        src_examples = [i.text.strip()
+                        for i in soup.find_all("div", {'class': 'src ltr'})]
 
-    trg_examples = [i.text.strip()
-                    for i in soup.find_all("div", {'class': ['trg ltr', 'trg rtl arabic', 'trg rtl']})]
+        trg_examples = [i.text.strip()
+                        for i in soup.find_all("div", {'class': ['trg ltr', 'trg rtl arabic', 'trg rtl']})]
 
-    output = ""
+        output = ""
 
-    output += f"{lang_out.title()} Translations:\n"
+        output += f"{lang_out.title()} Translations:\n"
 
-    output += "\n".join(translations[:1])
-    output += "\n"
-    output += f"\n{lang_out.title()} Example:\n"
+        output += "\n".join(translations[:1])
+        output += "\n"
+        output += f"\n{lang_out.title()} Example:\n"
 
-    for src, trg in zip(src_examples[:1], trg_examples[:1]):
-        output += src+":\n"+trg+"\n"
+        for src, trg in zip(src_examples[:1], trg_examples[:1]):
+            output += src+":\n"+trg+"\n"
 
-    output += "\n\n"
+        output += "\n\n"
 
     return output
 
@@ -78,8 +67,12 @@ src_lang = args[1]
 trg_lang = args[2]
 word = args[3]
 
+if src_lang.title() not in languages:
+    print(f"Sorry, the program doesn't support {src_lang}")
+elif trg_lang.title() not in languages:
+    print(f"Sorry, the program doesn't support {trg_lang}")
 
-if trg_lang == "all":
+elif trg_lang == "all":
     output = ""
     for language in languages:
         if language != src_lang:
