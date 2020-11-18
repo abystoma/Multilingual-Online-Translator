@@ -1,15 +1,11 @@
 from requests import Session
+
 from bs4 import BeautifulSoup
-from argparse import ArgumentParser
-import sys  # first, we import the module
-
-
-args = sys.argv  # we get the list of arguments
-
 
 session = Session()
 
-languages = ["Arabic",
+languages = [None,
+             "Arabic",
              "German",
              "English",
              "Spanish",
@@ -24,21 +20,20 @@ languages = ["Arabic",
              "Turkish"]
 
 
-def output():
-    print("""Hello, you're welcome to the translator. Translator supports: 
-    1. Arabic
-    2. German
-    3. English
-    4. Spanish
-    5. French
-    6. Hebrew
-    7. Japanese
-    8. Dutch
-    9. Polish
-    10. Portuguese
-    11. Romanian
-    12. Russian
-    13. Turkish""")
+print("""Hello, you're welcome to the translator. Translator supports: 
+1. Arabic
+2. German
+3. English
+4. Spanish
+5. French
+6. Hebrew
+7. Japanese
+8. Dutch
+9. Polish
+10. Portuguese
+11. Romanian
+12. Russian
+13. Turkish""")
 
 
 def to_lang(word, lang_in, lang_out):
@@ -70,26 +65,28 @@ def to_lang(word, lang_in, lang_out):
         output += src+":\n"+trg+"\n"
 
     output += "\n\n"
-
+    
     return output
 
 
-src_lang = args[1]
-trg_lang = args[2]
-word = args[3]
+src_lang = int(input("Type the number of your language: "))
+lang_in = languages[src_lang]
+trg_lang = int(input("Type the number of language you want to translate to: "))
+lang_out = languages[trg_lang]
+word = input("Type the word you want to translate: ")
 
 
-if trg_lang == "all":
+if lang_out is None:
     output = ""
-    for language in languages:
-        if language != src_lang:
-            output += to_lang(word, src_lang, language)
+    for language in languages[1::]:
+        if language != lang_in:
+            output += to_lang(word, lang_in, language)
     print(output)
     with open(f'{word}.txt', 'a', encoding="utf-8") as file:
         file.write(output)
 
 else:
-    output = to_lang(word, src_lang, trg_lang)
+    output = to_lang(word, lang_in, lang_out)
     print(output)
     with open(f'{word}.txt', 'w', encoding="utf-8") as file:
         file.write(output)
