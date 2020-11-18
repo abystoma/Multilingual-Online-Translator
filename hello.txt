@@ -1,0 +1,96 @@
+Arabic Translations:
+مرحبا
+
+Arabic Example:
+Well, hello, old-school racist.:
+حسنا، مرحبا يا تلميذة المدرسة العنصريّة - الأمر يسري بدمهم!
+
+
+German Translations:
+hallo
+
+German Example:
+Finally got a personalized hello from Earl.:
+Ich habe endlich ein personifiziertes hallo von Earl bekommen.
+
+
+Spanish Translations:
+hola
+
+Spanish Example:
+Well, hello, Miss Anchor-liar.:
+Bien, hola, señorita presentadora de mentiras.
+
+
+French Translations:
+bonjour
+
+French Example:
+Say goodbye to anti-aliasing and hello to naturally crisp graphics.:
+Dites adieu à l'anti-crénelage et bonjour à des graphismes naturellement nets.
+
+
+Hebrew Translations:
+שלום
+
+Hebrew Example:
+How come they never say hello?:
+איך זה שהן אף פעם לא אומרות שלום.
+
+
+Japanese Translations:
+こんにちは
+
+Japanese Example:
+The little boy said hello to me.:
+小さな男の子が私にこんにちはと言った。
+
+
+Dutch Translations:
+dag
+
+Dutch Example:
+Which in Hawaiian means hello and goodbye.:
+Dat betekent hallo en tot ziens in het Hawaiiaans.
+
+
+Polish Translations:
+cześć
+
+Polish Example:
+You had me at "hello".:
+Wystarczyło mi twoje "cześć".
+
+
+Portuguese Translations:
+olá
+
+Portuguese Example:
+That was my last kiss hello.:
+Pois eu garanto que aquele foi o meu último beijo de olá.
+
+
+Romanian Translations:
+salut
+
+Romanian Example:
+I came by to say hello.:
+Am avut o pauză de masă și am trecut să te salut.
+
+
+Russian Translations:
+привет
+
+Russian Example:
+Why, hello, there, Admiral.:
+А, Адмирал, привет, что здесь делаешь.
+
+
+Turkish Translations:
+selam
+
+Turkish Example:
+Say "hello" from Tito Spadola.:
+Tito Spadola'dan, "selam" söyleyeceğim.
+
+
